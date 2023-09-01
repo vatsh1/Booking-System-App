@@ -1,0 +1,56 @@
+spring:
+ cloud:
+   gateway:
+     routes:
+
+       - id: hotel-service
+         uri: lb://Hotel-SERVICE
+         predicates:
+           - Path=/hotel/**
+         filters:
+           - AuthenticationFilter
+
+       - id: flight-service
+         uri: lb://flight-service
+         predicates:
+           - Path=/flight/**
+         filters:
+           - AuthenticationFilter
+
+       - id: bus-service
+         uri: lb://bus-service
+         predicates:
+           - Path=/bus/**
+         filters:
+           - AuthenticationFilter
+
+       - id: booking-service
+         uri: lb://booking-service
+         predicates:
+           - Path=/booking/**
+         filters:
+           - AuthenticationFilter
+
+       - id: myfavorite
+         uri: lb://myfavorite
+         predicates:
+           - Path=/favorite/**
+         filters:
+           - AuthenticationFilter
+
+
+       - id: user-service
+         uri: lb://USER-SERVICE
+         predicates:
+           - Path=/auth/**
+
+
+ application:
+   name: API-GATEWAY
+
+eureka:
+  client:
+    service-url:
+      defaultZone : http://localhost:8761/eureka/
+
+
